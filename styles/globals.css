@@ -1,16 +1,16 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+:root {
+  --clr-blue: #2082ff;
+  --clr-100: #ffffff;
+  --clr-200: #d0d0d0;
+  --clr-600: #7e7e7e;
+  --clr-900: #000000;
 
-a {
-  color: inherit;
-  text-decoration: none;
+  --font: 'roboto';
+  --main-radius: 0.25rem;
 }
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
