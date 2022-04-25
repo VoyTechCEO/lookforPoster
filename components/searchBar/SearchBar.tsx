@@ -65,6 +65,7 @@ const SearchBar = () => {
           />
           <animated.button
             className={searchBarStyles.right_btn}
+            // @ts-expect-error
             style={activeRightBtn}
           >
             <animated.svg
@@ -80,7 +81,11 @@ const SearchBar = () => {
             </animated.svg>
           </animated.button>
         </div>
-        <animated.button className={searchBarStyles.btn} style={activeBtn}>
+        <animated.button
+          className={searchBarStyles.btn}
+          // @ts-expect-error
+          style={activeBtn}
+        >
           <animated.svg
             style={activeText}
             height='1.5rem'
