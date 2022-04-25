@@ -1,9 +1,11 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Overlay from '../components/overlay/Overlay';
+import SearchBar from '../components/searchBar/SearchBar';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <main className='main'>
       <Head>
         <title>lookforPoster</title>
         <meta name='description' content='Website made for looking for posts' />
@@ -13,7 +15,9 @@ const Home: NextPage = () => {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-    </div>
+      <Overlay />
+      <SearchBar />
+    </main>
   );
 };
 

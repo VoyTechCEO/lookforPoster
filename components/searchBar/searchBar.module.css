@@ -1,0 +1,68 @@
+.container {
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) !important;
+  z-index: 9;
+}
+
+.container .text {
+  color: var(--clr-600);
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  user-select: none;
+}
+
+.container .bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.container .right_btn {
+  all: unset;
+  cursor: pointer;
+  position: absolute;
+  left: calc(100% + 1rem);
+  display: flex;
+  align-items: center;
+}
+
+.container .search {
+  all: unset;
+  background-color: var(--clr-100);
+  width: 25rem;
+  padding: 0.7rem;
+  border: solid 1px var(--clr-100);
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: 0.2s;
+  z-index: 99;
+}
+
+.container .search:focus {
+  border: solid 1px var(--clr-blue);
+  transition: 0.2s;
+}
+
+.container .btn {
+  all: unset;
+  cursor: pointer;
+  padding: 1rem;
+  width: 9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.container svg {
+  fill: var(--clr-600);
+}
+
+.container .btn p {
+  color: var(--clr-600);
+  font-size: 1rem;
+}
