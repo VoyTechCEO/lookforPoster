@@ -1,16 +1,17 @@
 import type { NextPage } from 'next';
+import React from 'react';
 import HeadSetter from '../components/headSetter/HeadSetter';
+import LoginContainer from '../components/loginContainer/LoginContainer';
 import Overlay from '../components/overlay/Overlay';
-import SearchBar from '../components/searchBar/SearchBar';
 
-const Home: NextPage = () => {
+const login: NextPage = () => {
   return (
     <main className='main'>
-      <HeadSetter />
+      <HeadSetter title='Log in' />
       <Overlay />
-      <SearchBar />
+      <LoginContainer />
     </main>
   );
 };
 
-export default Home;
+export default login;

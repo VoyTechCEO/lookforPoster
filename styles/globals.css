@@ -5,11 +5,11 @@
   --clr-100: #ffffff;
   --clr-200: #d0d0d0;
   --clr-300: #c4c4c4;
+  --clr-400: #b4b4b4;
   --clr-600: #7e7e7e;
   --clr-900: #000000;
 
   --font: 'roboto';
-  --main-radius: 0.25rem;
 }
 
 * {
@@ -28,6 +28,7 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .container {
