@@ -7,8 +7,7 @@ const Home: NextPage = () => {
   return (
     <main className='main'>
       <HeadSetter />
-      <Overlay />
-      <SearchBar />
+      <Overlay children={<SearchBar />} />
     </main>
   );
 };

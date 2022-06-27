@@ -21,9 +21,9 @@ const RegisterContainer = () => {
     e.preventDefault();
     if (password === repPassword) {
       const registered = {
-        nickname: nickname,
-        email: email,
-        password: password,
+        nickname,
+        email,
+        password,
       };
 
       try {

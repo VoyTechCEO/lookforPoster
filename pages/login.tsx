@@ -8,8 +8,7 @@ const login: NextPage = () => {
   return (
     <main className='main'>
       <HeadSetter title='Log in' />
-      <Overlay />
-      <LoginContainer />
+      <Overlay children={<LoginContainer />} />
     </main>
   );
 };

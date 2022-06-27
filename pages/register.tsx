@@ -7,8 +7,7 @@ const register = () => {
   return (
     <main className='main'>
       <HeadSetter title='Register' />
-      <Overlay />
-      <RegisterContainer />
+      <Overlay children={<RegisterContainer />} />
     </main>
   );
 };
