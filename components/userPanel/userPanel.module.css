@@ -1,0 +1,26 @@
+.container {
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  position: absolute;
+  top: 3rem;
+  height: 7rem;
+}
+
+.container h1 {
+  font-size: 1rem;
+  color: var(--clr-900);
+  font-weight: 400;
+}
+
+.container a.navigate {
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--clr-600);
+}
+
+.container .border {
+  width: 30%;
+  height: 1px;
+  background-color: var(--clr-400);
+}

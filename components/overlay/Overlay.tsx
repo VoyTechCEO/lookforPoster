@@ -13,7 +13,7 @@ interface Props {
 const Overlay = ({ children }: Props) => {
   const [userData, setUserData] = useRecoilState(userDataState);
 
-  const { isLoading, error, data } = useQuery(`userData`, async () => {
+  const getUserData = async () => {
     try {
       const res = await fetch(`http://localhost:5000/auth/login`, {
         method: `GET`,
@@ -29,14 +29,19 @@ const Overlay = ({ children }: Props) => {
           mode: 'cors',
           credentials: 'include',
         });
+        await getUserData();
+        return;
       }
       const data = await res.json();
       console.log(data);
       setUserData(data);
-      return data;
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const { isLoading, error } = useQuery(`userData`, async () => {
+    await getUserData();
   });
 
   if (isLoading) {

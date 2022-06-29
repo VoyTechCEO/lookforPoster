@@ -3,6 +3,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { userDataState } from '../../recoil';
 import navStyles from './nav.module.css';
+import UserPanelContainer from '../userPanelContainer/UserPanelContainer';
 
 const Nav = () => {
   const [userData, setUserData] = useRecoilState(userDataState);
@@ -12,13 +13,17 @@ const Nav = () => {
       <nav className={`container ${navStyles.container}`}>
         <div className={navStyles.part}></div>
         <div className={navStyles.part}>
-          <Link href='/'>lookforPoster</Link>
+          <Link href='/'>
+            <a className={navStyles.navigate}>lookforPoster</a>
+          </Link>
         </div>
         <div className={navStyles.part}>
           {!userData.loggedIn ? (
-            <Link href='/login'>Log in</Link>
+            <Link href='/login'>
+              <a className={navStyles.navigate}>Log in</a>
+            </Link>
           ) : (
-            <Link href='/login'>{userData.user.nickname}</Link>
+            <UserPanelContainer />
           )}
         </div>
       </nav>

@@ -8,19 +8,19 @@
 
 .container .part {
   width: 15rem;
+  height: 5.1875rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
   font-size: 1rem;
 }
 
-.container a {
+.container a.navigate {
   text-decoration: none;
   color: var(--clr-blue);
 }
 
-.container .part:last-of-type a {
+.container .part:last-of-type a.navigate {
   color: var(--clr-600);
   font-weight: 500;
 }
