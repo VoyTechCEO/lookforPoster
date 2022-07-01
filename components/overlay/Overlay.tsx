@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from '../nav/Nav';
 import Footer from '../footer/Footer';
 import Gradient from '../gradient/Gradient';
@@ -12,6 +12,8 @@ interface Props {
 
 const Overlay = ({ children }: Props) => {
   const [userData, setUserData] = useRecoilState(userDataState);
+  // const [retriesLeft, setRetriesLeft] = useState(2);
+  let retriesLeft = 1;
 
   const getUserData = async () => {
     try {
@@ -23,12 +25,14 @@ const Overlay = ({ children }: Props) => {
         mode: 'cors',
         credentials: 'include',
       });
-      if (res.status === 401) {
+      if (res.status === 401 && retriesLeft > 0) {
         await fetch(`http://localhost:5000/auth/refresh`, {
           method: `POST`,
           mode: 'cors',
           credentials: 'include',
         });
+        retriesLeft--;
+        // setRetriesLeft(retriesLeft - 1);
         await getUserData();
         return;
       }

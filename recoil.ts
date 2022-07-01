@@ -11,4 +11,9 @@ const userDataState = atom({
   default: { user: { nickname: `` }, loggedIn: false },
 });
 
-export { userDataState };
+const isRegisterSuccessState = atom({
+  key: `isRegisterSuccessState`,
+  default: false,
+});
+
+export { userDataState, isRegisterSuccessState };

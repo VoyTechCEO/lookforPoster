@@ -11,6 +11,7 @@
   font-size: 1rem;
   color: var(--clr-900);
   font-weight: 400;
+  user-select: none;
 }
 
 .container a.navigate {

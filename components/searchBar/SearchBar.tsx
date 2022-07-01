@@ -18,6 +18,7 @@ const SearchBar = () => {
     from: { visibility: `visible` },
   }));
 
+  // @ts-ignore
   const [activeRightSvg, animateActiveRightSvg] = useSpring(() => ({
     from: { rotateZ: 90, opacity: 0 },
   }));

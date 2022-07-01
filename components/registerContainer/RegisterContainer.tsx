@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { isRegisterSuccessState } from '../../recoil';
 import LogInput from '../logInput/LogInput';
 import registerContainerStyles from './registerContainer.module.css';
 
@@ -11,6 +13,10 @@ interface Registered {
 
 const RegisterContainer = () => {
   const router = useRouter();
+
+  const [isRegisterSuccess, setIsRegisterSuccess] = useRecoilState(
+    isRegisterSuccessState
+  );
 
   const [nickname, setNickname] = useState(``);
   const [email, setEmail] = useState(``);
@@ -34,7 +40,8 @@ const RegisterContainer = () => {
           },
           body: JSON.stringify(registered),
         });
-        router.push(`/login`);
+        setIsRegisterSuccess(true);
+        router.push(`/`);
       } catch (err) {
         console.log(err);
       }

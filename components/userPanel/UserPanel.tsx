@@ -3,9 +3,24 @@ import userPanelStyles from './userPanel.module.css';
 import Link from 'next/link';
 import { useRecoilState } from 'recoil';
 import { userDataState } from '../../recoil';
+import { useRouter } from 'next/router';
 
 const UserPanel = () => {
+  const router = useRouter();
+
   const [userData, setUserData] = useRecoilState(userDataState);
+  const logOut = async () => {
+    try {
+      await fetch(`http://localhost:5000/auth/logout`, {
+        method: `POST`,
+        mode: 'cors',
+        credentials: 'include',
+      });
+      router.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -16,7 +31,14 @@ const UserPanel = () => {
         </Link>
         <div className={userPanelStyles.border} />
         <Link href='/'>
-          <a className={userPanelStyles.navigate}>Log out</a>
+          <a
+            className={userPanelStyles.navigate}
+            onClick={() => {
+              logOut();
+            }}
+          >
+            Log out
+          </a>
         </Link>
       </div>
     </>
