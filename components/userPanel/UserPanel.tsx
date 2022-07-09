@@ -26,7 +26,7 @@ const UserPanel = () => {
     <>
       <div className={`container ${userPanelStyles.container}`}>
         <h1>{userData.user.nickname}</h1>
-        <Link href='/profile'>
+        <Link href={`/profile/${userData.user.nickname}`}>
           <a className={userPanelStyles.navigate}>Check the profile</a>
         </Link>
         <div className={userPanelStyles.border} />

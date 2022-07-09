@@ -5,10 +5,19 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
+import IUser from './interfaces/iUser';
+
+// This object is set to avoid TypeScript errors caused by default user recoil state's type
+const userDefault: IUser = { nickname: ``, email: `` };
 
 const userDataState = atom({
   key: `userDataState`,
-  default: { user: { nickname: `` }, loggedIn: false },
+  default: { user: userDefault, loggedIn: false },
+});
+
+const currentProfileUserState = atom({
+  key: `currentProfileUserState`,
+  default: userDefault,
 });
 
 const isRegisterSuccessState = atom({
@@ -16,4 +25,4 @@ const isRegisterSuccessState = atom({
   default: false,
 });
 
-export { userDataState, isRegisterSuccessState };
+export { userDataState, currentProfileUserState, isRegisterSuccessState };

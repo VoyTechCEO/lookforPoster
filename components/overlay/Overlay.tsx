@@ -12,7 +12,7 @@ interface Props {
 
 const Overlay = ({ children }: Props) => {
   const [userData, setUserData] = useRecoilState(userDataState);
-  // const [retriesLeft, setRetriesLeft] = useState(2);
+
   let retriesLeft = 1;
 
   const getUserData = async () => {
@@ -32,7 +32,6 @@ const Overlay = ({ children }: Props) => {
           credentials: 'include',
         });
         retriesLeft--;
-        // setRetriesLeft(retriesLeft - 1);
         await getUserData();
         return;
       }

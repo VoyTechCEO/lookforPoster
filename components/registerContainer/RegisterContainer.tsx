@@ -18,6 +18,8 @@ const RegisterContainer = () => {
     isRegisterSuccessState
   );
 
+  const [isCorrect, setIsCorrect] = useState(true);
+
   const [nickname, setNickname] = useState(``);
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
@@ -33,15 +35,23 @@ const RegisterContainer = () => {
       };
 
       try {
-        await fetch(`http://localhost:5000/users/register`, {
+        const res = await fetch(`http://localhost:5000/users/register`, {
           method: `POST`,
           headers: {
             'Content-Type': 'application/json',
           },
+          mode: 'cors',
+          credentials: 'include',
           body: JSON.stringify(registered),
         });
-        setIsRegisterSuccess(true);
-        router.push(`/`);
+        const data = await res.json();
+        console.log(data);
+        if (data.registered) {
+          setIsRegisterSuccess(true);
+          router.push(`/`);
+        } else {
+          setIsCorrect(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -55,7 +65,14 @@ const RegisterContainer = () => {
       className={`container ${registerContainerStyles.container}`}
       onSubmit={onSubmit}
     >
-      <h1 className={registerContainerStyles.title}>Register</h1>
+      <div className={registerContainerStyles.info}>
+        <h1 className={registerContainerStyles.title}>Register</h1>
+        {!isCorrect && (
+          <p className={registerContainerStyles.error}>
+            Sorry, the nickname or email is already taken.
+          </p>
+        )}
+      </div>
       <LogInput label='Nickname' state={nickname} setState={setNickname} />
       <LogInput label='E-mail address' state={email} setState={setEmail} />
       <LogInput
