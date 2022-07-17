@@ -9,7 +9,8 @@
   font-size: 0.85rem;
   color: var(--clr-600);
   font-weight: 400;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
+  user-select: none;
 }
 
 .container button {
@@ -20,4 +21,24 @@
   position: absolute;
   bottom: 0;
   right: -3.5rem;
+}
+
+.container div ~ button {
+  position: static;
+  margin-top: 0.5rem;
+}
+
+.container .save {
+  right: -2.8rem;
+}
+
+.container .cancel {
+  right: -6rem;
+  color: var(--clr-red);
+}
+
+.container p.error {
+  color: var(--clr-red);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
 }

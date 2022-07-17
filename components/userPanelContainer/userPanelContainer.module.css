@@ -5,8 +5,17 @@
   width: 9rem;
 }
 
-.container button {
+.container button.picture {
   all: unset;
   cursor: pointer;
   display: flex;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  overflow: hidden;
+}
+
+.container img {
+  width: 100%;
+  height: auto;
 }

@@ -15,6 +15,11 @@ const userDataState = atom({
   default: { user: userDefault, loggedIn: false },
 });
 
+const userImageState = atom({
+  key: `userImageState`,
+  default: ``,
+});
+
 const currentProfileUserState = atom({
   key: `currentProfileUserState`,
   default: userDefault,
@@ -25,4 +30,15 @@ const isRegisterSuccessState = atom({
   default: false,
 });
 
-export { userDataState, currentProfileUserState, isRegisterSuccessState };
+const newNicknameState = atom({
+  key: `newNicknameState`,
+  default: ``,
+});
+
+export {
+  userDataState,
+  userImageState,
+  currentProfileUserState,
+  isRegisterSuccessState,
+  newNicknameState,
+};

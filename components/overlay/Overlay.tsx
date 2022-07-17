@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Nav from '../nav/Nav';
 import Footer from '../footer/Footer';
 import Gradient from '../gradient/Gradient';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
-import { userDataState } from '../../recoil';
+import { userDataState, userImageState } from '../../recoil';
 
 interface Props {
   children: JSX.Element;
@@ -12,6 +12,7 @@ interface Props {
 
 const Overlay = ({ children }: Props) => {
   const [userData, setUserData] = useRecoilState(userDataState);
+  const [userImage, setUserImage] = useRecoilState(userImageState);
 
   let retriesLeft = 1;
 
@@ -37,7 +38,15 @@ const Overlay = ({ children }: Props) => {
       }
       const data = await res.json();
       console.log(data);
+      const resImg = await fetch(`http://localhost:5000/img/erenSuit.png`, {
+        method: `GET`,
+        mode: 'cors',
+        credentials: 'include',
+      });
+      const imageBlob = await resImg.blob();
+      const imageURL = URL.createObjectURL(imageBlob);
       setUserData(data);
+      setUserImage(imageURL);
     } catch (err) {
       console.log(err);
     }

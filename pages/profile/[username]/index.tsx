@@ -33,10 +33,26 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   try {
-    const res = await fetch(
-      `http://localhost:5000/users/${context.params?.username}`
+    const resUser = await fetch(
+      `http://localhost:5000/users/${context.params?.username}`,
+      {
+        method: `GET`,
+        mode: 'cors',
+        credentials: 'include',
+      }
     );
-    const user: IUser = await res.json();
+    const user: IUser = await resUser.json();
+
+    // const resImg = await fetch(`http://localhost:5000/img/erenSuit.png`, {
+    //   method: `GET`,
+    //   mode: 'cors',
+    //   credentials: 'include',
+    // });
+    // const imageBlob = await resImg.blob();
+    // console.log(2);
+
+    // const imageURL = await imageBlob.text();
+    // console.log(3);
 
     return {
       props: { user },
