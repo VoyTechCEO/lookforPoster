@@ -41,6 +41,13 @@
   fill: var(--clr-600);
 }
 
-.file label:hover svg {
+.file label:hover svg,
+.file label:hover p {
   fill: var(--clr-blue);
+  color: var(--clr-blue);
+}
+
+.file p {
+  max-width: 6rem;
+  overflow: hidden;
 }

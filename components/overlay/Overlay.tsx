@@ -38,15 +38,20 @@ const Overlay = ({ children }: Props) => {
       }
       const data = await res.json();
       console.log(data);
-      const resImg = await fetch(`http://localhost:5000/img/erenSuit.png`, {
-        method: `GET`,
-        mode: 'cors',
-        credentials: 'include',
-      });
-      const imageBlob = await resImg.blob();
-      const imageURL = URL.createObjectURL(imageBlob);
+      if (data.loggedIn) {
+        const resImg = await fetch(
+          `http://localhost:5000/img/${data.user.picture}`,
+          {
+            method: `GET`,
+            mode: 'cors',
+            credentials: 'include',
+          }
+        );
+        const imageBlob = await resImg.blob();
+        const imageURL = URL.createObjectURL(imageBlob);
+        setUserImage(imageURL);
+      }
       setUserData(data);
-      setUserImage(imageURL);
     } catch (err) {
       console.log(err);
     }

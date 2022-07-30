@@ -1,30 +1,50 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
-  currentProfileUserState,
+  isImgOversizedState,
   newNicknameState,
+  profilePicNameState,
   userDataState,
 } from '../../recoil';
 import profileInputStyles from './profileInput.module.css';
 import ProfileInputContent from '../profileInputContent/ProfileInputContent';
 import { useRouter } from 'next/router';
+import IUser from '../../interfaces/iUser';
 
 interface Props {
   name: string;
   content: string;
+  user: IUser;
 }
 
-const ProfileInput = ({ name, content }: Props) => {
+const ProfileInput = ({ name, content, user }: Props) => {
   const [userData, setUserData] = useRecoilState(userDataState);
-  const [currentProfileUser, setCurrentProfileUser] = useRecoilState(
-    currentProfileUserState
-  );
   const [newNickname, setNewNickname] = useRecoilState(newNicknameState);
+  const [profilePicName, setProfilePicName] =
+    useRecoilState(profilePicNameState);
+  const [isImgOversized, setIsImgOversized] =
+    useRecoilState(isImgOversizedState);
 
   const [isEdit, setIsEdit] = useState(false);
   const [isTaken, setIsTaken] = useState(false);
 
   const router = useRouter();
+  const formRef = useRef(null);
+
+  const onSubmitPicture = async () => {
+    try {
+      await fetch(`http://localhost:5000/img`, {
+        method: `POST`,
+        mode: 'cors',
+        credentials: 'include',
+        body: new FormData(formRef.current!),
+      });
+      setProfilePicName(``);
+      router.push(`/`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onSubmitNickname = async () => {
     try {
@@ -45,7 +65,6 @@ const ProfileInput = ({ name, content }: Props) => {
       } else {
         setIsTaken(true);
       }
-      // get the responses and check if the nickname is taken
     } catch (err) {
       console.log(err);
     }
@@ -56,6 +75,7 @@ const ProfileInput = ({ name, content }: Props) => {
       <form
         className={`container ${profileInputStyles.container}`}
         method='POST'
+        ref={formRef}
         encType={
           name === `Profile picture`
             ? 'multipart/form-data'
@@ -67,28 +87,33 @@ const ProfileInput = ({ name, content }: Props) => {
         {isTaken && (
           <p className={profileInputStyles.error}>Nickname is already taken.</p>
         )}
+        {isImgOversized && name === `Profile picture` && (
+          <p className={profileInputStyles.error}>Your image is too big.</p>
+        )}
         <ProfileInputContent
           name={name}
           content={content}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
         />
-        {(userData.user === currentProfileUser || name !== `E-mail address`) &&
-          !isEdit && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsEdit(true);
-              }}
-            >
-              Change
-            </button>
-          )}
+        {(userData.user === user || name !== `E-mail address`) && !isEdit && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsEdit(true);
+            }}
+          >
+            Change
+          </button>
+        )}
         {isEdit && (
           <>
             <button
+              type='submit'
               className={profileInputStyles.save}
-              onClick={onSubmitNickname}
+              onClick={
+                name === `Profile picture` ? onSubmitPicture : onSubmitNickname
+              }
             >
               Save
             </button>
@@ -99,6 +124,8 @@ const ProfileInput = ({ name, content }: Props) => {
                 setIsEdit(false);
                 setNewNickname(``);
                 setIsTaken(false);
+                setIsImgOversized(false);
+                setProfilePicName(``);
               }}
             >
               Cancel

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import profileContainerStyles from './profileContainer.module.css';
-import { useRecoilState } from 'recoil';
-import { currentProfileUserState, userDataState } from '../../recoil';
 import ProfileInput from '../profileInput/ProfileInput';
 import { useQuery } from 'react-query';
+import IUser from '../../interfaces/iUser';
 
-const ProfileContainer = () => {
-  const [currentProfileUser, setCurrentProfileUser] = useRecoilState(
-    currentProfileUserState
-  );
+interface Props {
+  user: IUser;
+}
+
+const ProfileContainer = ({ user }: Props) => {
   const [currentProfilePicture, setCurrentProfilePicture] = useState(``);
 
   const getProfilePicture = async () => {
     try {
-      const resImg = await fetch(`http://localhost:5000/img/erenSuit.png`, {
+      const resImg = await fetch(`http://localhost:5000/img/${user.picture}`, {
         method: `GET`,
         mode: 'cors',
         credentials: 'include',
@@ -25,7 +25,7 @@ const ProfileContainer = () => {
       console.log(err);
     }
   };
-  const { isLoading, data } = useQuery(`currentProfilePicture`, async () => {
+  const { isLoading } = useQuery(`currentProfilePicture`, async () => {
     await getProfilePicture();
   });
 
@@ -40,12 +40,13 @@ const ProfileContainer = () => {
   return (
     <>
       <section className={`container ${profileContainerStyles.container}`}>
-        <ProfileInput name='Profile picture' content={currentProfilePicture} />
-        <ProfileInput name='Nickname' content={currentProfileUser.nickname} />
         <ProfileInput
-          name='E-mail address'
-          content={currentProfileUser.email}
+          name='Profile picture'
+          content={currentProfilePicture}
+          user={user}
         />
+        <ProfileInput name='Nickname' content={user.nickname} user={user} />
+        <ProfileInput name='E-mail address' content={user.email} user={user} />
       </section>
     </>
   );

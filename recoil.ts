@@ -20,10 +20,10 @@ const userImageState = atom({
   default: ``,
 });
 
-const currentProfileUserState = atom({
-  key: `currentProfileUserState`,
-  default: userDefault,
-});
+// const currentProfileUserState = atom({
+//   key: `currentProfileUserState`,
+//   default: userDefault,
+// });
 
 const isRegisterSuccessState = atom({
   key: `isRegisterSuccessState`,
@@ -35,10 +35,22 @@ const newNicknameState = atom({
   default: ``,
 });
 
+const profilePicNameState = atom({
+  key: `profilePicNameState`,
+  default: ``,
+});
+
+const isImgOversizedState = atom({
+  key: `isImgOversizedState`,
+  default: false,
+});
+
 export {
   userDataState,
   userImageState,
-  currentProfileUserState,
+  // currentProfileUserState,
   isRegisterSuccessState,
   newNicknameState,
+  profilePicNameState,
+  isImgOversizedState,
 };
